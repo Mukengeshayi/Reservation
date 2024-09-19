@@ -12,7 +12,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::all();
+        return view('pages.reservation.index', compact('reservations'));
     }
 
     /**
@@ -20,7 +21,8 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.reservation.create');
+
     }
 
     /**
@@ -44,7 +46,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('pages.reservation.edit', compact('reservation'));
     }
 
     /**

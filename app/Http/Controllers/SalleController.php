@@ -12,7 +12,8 @@ class SalleController extends Controller
      */
     public function index()
     {
-        //
+        $salles = salle::all();
+        return view('pages.salle.index', compact('salles'));
     }
 
     /**
@@ -20,7 +21,7 @@ class SalleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.salle.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class SalleController extends Controller
      */
     public function edit(salle $salle)
     {
-        //
+        return view('pages.salle.edit', compact('salle'));
     }
 
     /**
