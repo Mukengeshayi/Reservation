@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\salle;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -10,10 +11,12 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request->all());
         $reservations = Reservation::all();
-        return view('pages.reservation.index', compact('reservations'));
+        $salles = salle::all();
+        return view('pages.reservation.index', compact('reservations','salles'));
     }
 
     /**
