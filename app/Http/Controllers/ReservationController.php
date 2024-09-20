@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Reservation;
 use App\Models\salle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        // dd($request->all());
-        $reservations = Reservation::all();
-        $salles = salle::all();
+        $reservations = Reservation::with('user', 'salle')->where('user_id', Auth::id())->paginate(10);
+        $salles = salle::where('availability', '1')->get();
         return view('pages.reservation.index', compact('reservations','salles'));
     }
 
@@ -24,16 +25,19 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        return view('pages.reservation.create');
 
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReservationStoreRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = Auth::id();
+
+        Reservation::create($validatedData);
+        return redirect()->route('reservations.index')->with('success', 'Salle reservée créée avec succès.');
     }
 
     /**
@@ -65,6 +69,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->route('reservations.index')->with('success', 'Reservation supprimée avec succès.');
     }
 }

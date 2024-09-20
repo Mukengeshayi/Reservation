@@ -17,6 +17,12 @@
             <span class="menu-title">Reservation</span>
             </a>
         </li>
+        </li><li class="nav-item">
+            <a class="nav-link" href="#">
+            <i class="icon-grid menu-icon"></i>
+            <span class="menu-title">Employés</span>
+            </a>
+        </li>
 
     </ul>
 </nav>
