@@ -113,10 +113,15 @@
             <img src="assets/images/faces/face28.jpg" alt="profile">
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item">
-              <i class="ti-power-off text-primary"></i>
-              Logout
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();"><i class="ti-power-off text-primary"></i>
+                    {{ __('Deconnexion') }}
+                </x-dropdown-link>
+            </form>
           </div>
         </li>
       </ul>

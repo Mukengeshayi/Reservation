@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SalleController;
@@ -19,10 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('salles', SalleController::class);
-    Route::resource('reservations', ReservationController::class);
-    Route::resource('dashboard',DashboardController ::class);
+});
+Route::middleware(['role:admin'])->group(function () {
+    Route::resource('admin/salles', SalleController::class);
+    Route::resource('admin/dashboard',DashboardController ::class);
+    Route::resource('admin/employés', EmployerController ::class);
+});
 
+Route::middleware(['role:demandeur'])->group(function () {
+    Route::resource('demandeur/reservations', ReservationController::class);
 
 });
 

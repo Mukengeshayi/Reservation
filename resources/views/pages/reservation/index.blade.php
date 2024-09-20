@@ -33,7 +33,7 @@
                             <div class="form-group row">
                                 <label for="reservation_date" class="col-sm-3 col-form-label">Date de reservation</label>
                                 <div class="col-sm-9">
-                                  <input type="date" name="reservation_date" id="reservation_date" class="form-control" placeholder="dd/mm/yyyy">
+                                  <input type="date" name="reservation_date" id="reservation_date" value="{{ old('reservation_date') }}" class="form-control" placeholder="dd/mm/yyyy">
                                   @error('reservation_date')
                                       <div class="text-danger"> {{$message}}</div>
                                   @enderror
@@ -46,7 +46,7 @@
                             <div class="form-group row">
                                 <label for="start_time_reservation" class="col-sm-3 col-form-label">Heure de debut</label>
                                 <div class="col-sm-9">
-                                    <input type="time" name="start_time_reservation" id="start_time_reservation"  class="form-control">
+                                    <input type="time" name="start_time_reservation" id="start_time_reservation" value="{{ old('start_time_reservation') }}" class="form-control">
                                     @error('start_time_reservation')
                                       <div class="text-danger"> {{$message}}</div>
                                     @enderror
@@ -57,7 +57,7 @@
                             <div class="form-group row">
                                 <label for="end_time_reservation" class="col-sm-3 col-form-label">Heure de Fin</label>
                                 <div class="col-sm-9">
-                                    <input type="time" name="end_time_reservation" id="end_time_reservation" class="form-control">
+                                    <input type="time" name="end_time_reservation" id="end_time_reservation" value="{{ old('end_time_reservation') }}" class="form-control">
                                     @error('end_time_reservation')
                                       <div class="text-danger"> {{$message}}</div>
                                     @enderror

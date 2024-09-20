@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployerController extends Controller
@@ -11,7 +13,8 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        //
+        $employes= User::paginate(4);
+        return view('pages.employe.index', compact('employes'));
     }
 
     /**
@@ -25,9 +28,17 @@ class EmployerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+    $validatedData = $request->validated();
+    User::create([
+        'name' => $validatedData['name'],
+        'firstname' => $validatedData['firstname'],
+        'email' => $validatedData['email'],
+        'password' => bcrypt($validatedData['password']),
+        'role' => $validatedData['role'],
+    ]);
+        return redirect()->route('employés.index')->with('success', 'Employé créée avec succès.');;
     }
 
     /**
