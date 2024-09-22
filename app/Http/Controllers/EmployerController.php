@@ -38,7 +38,7 @@ class EmployerController extends Controller
         'password' => bcrypt($validatedData['password']),
         'role' => $validatedData['role'],
     ]);
-        return redirect()->route('employés.index')->with('success', 'Employé créée avec succès.');;
+        return redirect()->route('employés.index')->with('success', 'Employé créée avec succès.');
     }
 
     /**
@@ -52,24 +52,27 @@ class EmployerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $employé)
     {
-        //
+        return view('pages.employe.edit', compact('employé'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $employé)
     {
-        //
+        $employé->update($request->all());
+        return redirect()->route('employés.index')->with('success', 'Employé modifié avec succès.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $employé)
     {
-        //
+        $employé->delete();
+        return redirect()->route('employés.index')->with('success', 'Employé supprimé avec succès.');
     }
 }

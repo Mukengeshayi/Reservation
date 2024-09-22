@@ -16,6 +16,14 @@
             </a>
         </li>
         @endif
+        @if(auth()->user()->role =='admin')
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('adminreservations.index')}}">
+            <i class="icon-grid menu-icon"></i>
+            <span class="menu-title">Reservation</span>
+            </a>
+        </li>
+        @endif
         @if(auth()->user()->role =='demandeur')
             <li class="nav-item">
                 <a class="nav-link" href="{{route('reservations.index')}}">

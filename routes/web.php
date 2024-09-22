@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,11 @@ Route::middleware(['role:admin'])->group(function () {
     Route::resource('admin/salles', SalleController::class);
     Route::resource('admin/dashboard',DashboardController ::class);
     Route::resource('admin/employés', EmployerController ::class);
+    Route::resource('admin/employés', EmployerController ::class);
+
+    Route::resource('admin/adminreservations',AdminReservationController ::class);
+    Route::patch('admin/adminreservations/{reservation}/status',[AdminReservationController ::class, 'updateStatus'])->name('adminreservations.updateStatus');;
+
 });
 
 Route::middleware(['role:demandeur'])->group(function () {
